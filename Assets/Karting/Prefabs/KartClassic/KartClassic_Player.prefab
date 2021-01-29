@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2e8893a3093437d9d101b53db56941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kartStats: {fileID: 11400000, guid: 8052f622139c33e40983ef52314ff1bb, type: 2}
   baseStats:
     TopSpeed: 10
     Acceleration: 5

@@ -83,8 +83,8 @@ namespace KartGame.KartSystems
         public Vector2 Input       { get; private set; }
         public float AirPercent    { get; private set; }
         public float GroundPercent { get; private set; }
+        public SO_KartStatistics KartStats { get => kartStats; set => kartStats = value; }
 
-        
         public ArcadeKart.Stats baseStats = new ArcadeKart.Stats
         {
             TopSpeed            = 10f,
@@ -143,19 +143,19 @@ namespace KartGame.KartSystems
 
         private void SetStats()
         {
-            if (kartStats)
+            if (KartStats)
             {
-                baseStats.TopSpeed = kartStats.TopSpeed;
-                baseStats.Acceleration = kartStats.Acceleration;
-                baseStats.AccelerationCurve = kartStats.AccelerationCurve;
-                baseStats.Braking = kartStats.Braking;
-                baseStats.ReverseAcceleration = kartStats.ReverseAcceleration;
-                baseStats.ReverseSpeed = kartStats.ReverseSpeed;
-                baseStats.Steer = kartStats.Steer;
-                baseStats.CoastingDrag = kartStats.CoastingDrag;
-                baseStats.Grip = kartStats.Grip;
-                baseStats.AddedGravity = kartStats.AddedGravity;
-                baseStats.Suspension = kartStats.Suspension;
+                baseStats.TopSpeed = KartStats.TopSpeed;
+                baseStats.Acceleration = KartStats.Acceleration;
+                baseStats.AccelerationCurve = KartStats.AccelerationCurve;
+                baseStats.Braking = KartStats.Braking;
+                baseStats.ReverseAcceleration = KartStats.ReverseAcceleration;
+                baseStats.ReverseSpeed = KartStats.ReverseSpeed;
+                baseStats.Steer = KartStats.Steer;
+                baseStats.CoastingDrag = KartStats.CoastingDrag;
+                baseStats.Grip = KartStats.Grip;
+                baseStats.AddedGravity = KartStats.AddedGravity;
+                baseStats.Suspension = KartStats.Suspension;
             }
             
         }
