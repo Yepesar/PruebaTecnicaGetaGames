@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Karting/Scenes/WinScene.unity
     guid: d6801f2e59f75ee4b919cf5da4e48e3b
+  - enabled: 1
+    path: Assets/Karting/Scenes/TimeTrial.unity
+    guid: d18a683c3c38ca24382f3b5f31d94a25
+  - enabled: 1
+    path: Assets/Karting/Scenes/Race.unity
+    guid: 9030648b28693374e8fc269b0bb538bf
+  - enabled: 1
+    path: Assets/Karting/Scenes/Customize.unity
+    guid: 759297f8b4778b14baeeadef0a2fd579
   m_configObjects: {}
