@@ -5,6 +5,8 @@ namespace KartGame.KartSystems
 {
     public class ArcadeKart : MonoBehaviour
     {
+        [SerializeField] private SO_KartStatistics kartStats;
+
         /// <summary>
         /// Contains parameters that can adjust the kart's behaviors temporarily.
         /// </summary>
@@ -16,50 +18,47 @@ namespace KartGame.KartSystems
             public float ElapsedTime;
             public float MaxTime;
         }
-
+        
         /// <summary>
         /// Contains a series tunable parameters to tweak various karts for unique driving mechanics.
         /// </summary>
         [System.Serializable]
         public struct Stats
         {
-            [Header("Movement Settings")]
-            [Tooltip("The maximum speed forwards")]
+            [HideInInspector]
             public float TopSpeed;
 
-            [Tooltip("How quickly the Kart reaches top speed.")]
+            [HideInInspector]
             public float Acceleration;
 
-            [Tooltip("The maximum speed backward.")]
+            [HideInInspector]
             public float ReverseSpeed;
 
-            [Tooltip("The rate at which the kart increases its backward speed.")]
+            [HideInInspector]
             public float ReverseAcceleration;
 
-            [Tooltip("How quickly the Kart starts accelerating from 0. A higher number means it accelerates faster sooner.")]
-            [Range(0.2f, 1)]
+            [HideInInspector]
             public float AccelerationCurve;
 
-            [Tooltip("How quickly the Kart slows down when going in the opposite direction.")]
+            [HideInInspector]
             public float Braking;
 
-            [Tooltip("How quickly to slow down when neither acceleration or reverse is held.")]
+            [HideInInspector]
             public float CoastingDrag;
 
-            [Range(0, 1)]
-            [Tooltip("The amount of side-to-side friction.")]
+            [HideInInspector]
             public float Grip;
 
-            [Tooltip("How quickly the Kart can turn left and right.")]
+            [HideInInspector]
             public float Steer;
 
-            [Tooltip("Additional gravity for when the Kart is in the air.")]
+            [HideInInspector]
             public float AddedGravity;
 
-            [Tooltip("How much the Kart tries to keep going forward when on bumpy terrain.")]
-            [Range(0, 1)]
+            [HideInInspector]
             public float Suspension;
 
+            
             // allow for stat adding for powerups.
             public static Stats operator +(Stats a, Stats b)
             {
@@ -85,6 +84,7 @@ namespace KartGame.KartSystems
         public float AirPercent    { get; private set; }
         public float GroundPercent { get; private set; }
 
+        
         public ArcadeKart.Stats baseStats = new ArcadeKart.Stats
         {
             TopSpeed            = 10f,
@@ -137,6 +137,27 @@ namespace KartGame.KartSystems
             m_Inputs = GetComponents<IInput>();
             suspensionNeutralPos = SuspensionBody.transform.localPosition;
             suspensionNeutralRot = SuspensionBody.transform.localRotation;
+
+            SetStats();
+        }
+
+        private void SetStats()
+        {
+            if (kartStats)
+            {
+                baseStats.TopSpeed = kartStats.TopSpeed;
+                baseStats.Acceleration = kartStats.Acceleration;
+                baseStats.AccelerationCurve = kartStats.AccelerationCurve;
+                baseStats.Braking = kartStats.Braking;
+                baseStats.ReverseAcceleration = kartStats.ReverseAcceleration;
+                baseStats.ReverseSpeed = kartStats.ReverseSpeed;
+                baseStats.Steer = kartStats.Steer;
+                baseStats.CoastingDrag = kartStats.CoastingDrag;
+                baseStats.Grip = kartStats.Grip;
+                baseStats.AddedGravity = kartStats.AddedGravity;
+                baseStats.Suspension = kartStats.Suspension;
+            }
+            
         }
 
         void FixedUpdate()
