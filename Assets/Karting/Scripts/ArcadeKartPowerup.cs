@@ -73,7 +73,7 @@ public class ArcadeKartPowerup : MonoBehaviour {
                 //OilPool
                 else if (powerUpType == PowerUpType.OilPool)
                 {
-
+                    StartCoroutine(kart.SteerChaos(boostStats.MaxTime, boostStats.SteerModifier));
                 }
 
                 if (disableGameObjectWhenActivated) this.gameObject.SetActive(false);

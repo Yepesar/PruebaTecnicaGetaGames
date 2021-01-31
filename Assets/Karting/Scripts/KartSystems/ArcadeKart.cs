@@ -152,6 +152,13 @@ namespace KartGame.KartSystems
             baseStats.TopSpeed = KartStats.TopSpeed;
         }
 
+        public IEnumerator SteerChaos(float duration, float steerFactor)
+        {
+            baseStats.Steer = steerFactor;
+            yield return new WaitForSeconds(duration);
+            baseStats.Steer = KartStats.Steer;
+        }
+
         private void SetStats()
         {
             if (KartStats)
