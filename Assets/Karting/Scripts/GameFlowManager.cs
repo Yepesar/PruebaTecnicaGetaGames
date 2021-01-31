@@ -39,9 +39,12 @@ public class GameFlowManager : MonoBehaviour
     public GameState gameState { get; private set; }
 
     public bool autoFindKarts = true;
+    public bool railCars = false;
     public ArcadeKart playerKart;
+    public RailMovemnt railPlayerKart;
 
     ArcadeKart[] karts;
+    RailMovemnt[] railKarts;
     ObjectiveManager m_ObjectiveManager;
     TimeManager m_TimeManager;
     float m_TimeLoadEndGameScene;
@@ -52,12 +55,24 @@ public class GameFlowManager : MonoBehaviour
     {
         if (autoFindKarts)
         {
-            karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length > 0)
+            if (!railCars)
             {
-                if (!playerKart) playerKart = karts[0];
+                karts = FindObjectsOfType<ArcadeKart>();
+                if (karts.Length > 0)
+                {
+                    if (!playerKart) playerKart = karts[0];
+                }
+                DebugUtility.HandleErrorIfNullFindObject<ArcadeKart, GameFlowManager>(playerKart, this);
             }
-            DebugUtility.HandleErrorIfNullFindObject<ArcadeKart, GameFlowManager>(playerKart, this);
+            else
+            {
+                railKarts = FindObjectsOfType<RailMovemnt>();
+                if (railKarts.Length > 0)
+                {
+                    if (!railPlayerKart) railPlayerKart = railKarts[0];
+                }
+            }
+            
         }
 
         m_ObjectiveManager = FindObjectOfType<ObjectiveManager>();
@@ -72,10 +87,22 @@ public class GameFlowManager : MonoBehaviour
         loseDisplayMessage.gameObject.SetActive(false);
 
         m_TimeManager.StopRace();
-        foreach (ArcadeKart k in karts)
+
+        if (!railCars)
         {
-			k.SetCanMove(false);
+            foreach (ArcadeKart k in karts)
+            {
+                k.SetCanMove(false);
+            }
         }
+        else
+        {
+            foreach (RailMovemnt k in railKarts)
+            {
+                k.Canmove = false;
+            }
+        }
+        
 
         //run race countdown animation
         ShowRaceCountdownAnimation();
@@ -90,11 +117,23 @@ public class GameFlowManager : MonoBehaviour
     }
 
     void StartRace() {
-        foreach (ArcadeKart k in karts)
+
+        if (!railCars)
         {
-			k.SetCanMove(true);
+            foreach (ArcadeKart k in karts)
+            {
+                k.SetCanMove(true);
+            }
+            m_TimeManager.StartRace();
         }
-        m_TimeManager.StartRace();
+        else
+        {
+            foreach (RailMovemnt k in railKarts)
+            {
+                k.Canmove = true;
+            }
+        }
+
     }
 
     void ShowRaceCountdownAnimation() {
