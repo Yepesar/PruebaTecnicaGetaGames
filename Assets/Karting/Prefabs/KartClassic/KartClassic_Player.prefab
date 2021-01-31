@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f657f4a31ed9e3b42b359f25e81ed4c9, type: 2}
   kartPatterns:
   - {fileID: 2100000, guid: 9cb68afd93a5e4f4e8ac28258644e258, type: 2}
-  - {fileID: 2100000, guid: b3639ecc60813204eb0698b50f0725b8, type: 2}
+  - {fileID: 2100000, guid: c0fa8aedfc4717c48964c97e3b184eac, type: 2}
   - {fileID: 2100000, guid: e6c1a008f07f3e1449b8994255942a51, type: 2}
   wheels:
   - {fileID: 1047059979839990676}

@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Karting/Scenes/PowerUps.unity
     guid: 562a4d9ca6d164542a11675372ce4340
+  - enabled: 1
+    path: Assets/Karting/Scenes/RailMechanics.unity
+    guid: e7c0c8330a1927448918a13d0af4e768
   m_configObjects: {}
