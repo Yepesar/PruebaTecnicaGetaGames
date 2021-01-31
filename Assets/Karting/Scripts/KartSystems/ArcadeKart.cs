@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace KartGame.KartSystems
@@ -17,6 +18,9 @@ namespace KartGame.KartSystems
             public string PowerUpID;
             public float ElapsedTime;
             public float MaxTime;
+            public float TopSpeed;
+            public float JumpForce;
+            public float SteerModifier;
         }
         
         /// <summary>
@@ -139,6 +143,13 @@ namespace KartGame.KartSystems
             suspensionNeutralRot = SuspensionBody.transform.localRotation;
 
             SetStats();
+        }
+
+        public IEnumerator Boost(float duration, float newSpeed)
+        {
+            baseStats.TopSpeed = newSpeed;
+            yield return new WaitForSeconds(duration);
+            baseStats.TopSpeed = KartStats.TopSpeed;
         }
 
         private void SetStats()

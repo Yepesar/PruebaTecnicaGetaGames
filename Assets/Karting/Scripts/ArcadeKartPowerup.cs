@@ -2,11 +2,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum PowerUpType {Boost,Jumpad, OilPool }
 public class ArcadeKartPowerup : MonoBehaviour {
+
+    [SerializeField] private PowerUpType powerUpType;
 
     public ArcadeKart.StatPowerup boostStats = new ArcadeKart.StatPowerup
     {
-        MaxTime = 5
+        MaxTime = 5,
+        TopSpeed = 0,
+        JumpForce = 0,
+        SteerModifier = 0
     };
 
     public bool isCoolingDown { get; private set; }
@@ -53,6 +59,22 @@ public class ArcadeKartPowerup : MonoBehaviour {
                 kart.AddPowerup(this.boostStats);
                 onPowerupActivated.Invoke();
                 isCoolingDown = true;
+
+                //Boost
+                if (powerUpType == PowerUpType.Boost)
+                {
+                    StartCoroutine(kart.Boost(boostStats.MaxTime, boostStats.TopSpeed));
+                }
+                //Jumpad
+                else if (powerUpType == PowerUpType.Jumpad)
+                {
+                    rb.AddForce(Vector3.up * boostStats.JumpForce, ForceMode.Impulse);
+                }
+                //OilPool
+                else if (powerUpType == PowerUpType.OilPool)
+                {
+
+                }
 
                 if (disableGameObjectWhenActivated) this.gameObject.SetActive(false);
             }
